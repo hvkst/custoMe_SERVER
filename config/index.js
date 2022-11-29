@@ -8,17 +8,18 @@ const cookieParser = require('cookie-parser');
 
 const cors = require('cors');
 
-const FRONTEND_URL = process.env.ORIGIN || 'http://localhost:3000';
+// const path = require('path');
+
+const CLIENT_ORIGIN = process.env.ORIGIN || 'http://localhost:3000';
 
 // Middleware configuration
 module.exports = (app) => {
   app.set('trust proxy', 1);
 
-  app.use(
-    cors({
-      origin: [FRONTEND_URL],
-    })
-  );
+  // Static File Declaration
+  // app.use(express.static(path.join(__dirname, 'client/build')));
+
+  app.use(cors({ origin: CLIENT_ORIGIN, credentials: true }));
 
   // In development environment the app logs
   app.use(logger('dev'));
